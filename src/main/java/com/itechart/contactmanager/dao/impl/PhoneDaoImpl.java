@@ -4,6 +4,8 @@ import com.itechart.contactmanager.dao.PhoneDao;
 import com.itechart.contactmanager.model.Phone;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Bogdan Shishkin
  * project: contact-manager
@@ -21,5 +23,11 @@ public class PhoneDaoImpl extends BaseDaoImpl<Phone> implements PhoneDao {
     public Phone findByNumber(String number) {
         return entityManager.createQuery("SELECT p FROM Phone p WHERE p.number = :number", entityClass)
                 .setParameter("number", number).getSingleResult();
+    }
+
+    @Override
+    public List<Phone> getByEmployeeId(long employeeId) {
+        return entityManager.createQuery("SELECT p FROM Phone p WHERE p.employee.id = :employeeId", entityClass)
+                .setParameter("employeeId", employeeId).getResultList();
     }
 }

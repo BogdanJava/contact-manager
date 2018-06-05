@@ -19,7 +19,6 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = {"number"})
 })
 @NoArgsConstructor
-@AllArgsConstructor
 public class Phone {
 
     @Id
@@ -31,4 +30,9 @@ public class Phone {
     private Employee employee;
 
     private String number;
+
+    public Phone(Employee employee, String number) {
+        this.employee = employee;
+        this.number = number;
+    }
 }

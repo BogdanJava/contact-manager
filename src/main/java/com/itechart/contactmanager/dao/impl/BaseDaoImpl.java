@@ -21,8 +21,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     protected EntityManager entityManager;
 
     @Override
-    public void save(T entity) {
+    public T save(T entity) {
         entityManager.persist(entity);
+        return entity;
     }
 
     @Override

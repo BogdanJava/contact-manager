@@ -1,7 +1,6 @@
 package com.itechart.contactmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +16,6 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username")
@@ -35,4 +33,8 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Employee> employees;
+
+    public User(String username) {
+        this.username = username;
+    }
 }

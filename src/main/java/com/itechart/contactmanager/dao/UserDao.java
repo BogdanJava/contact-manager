@@ -11,4 +11,5 @@ import com.itechart.contactmanager.model.User;
 
 public interface UserDao extends BaseDao<User> {
     User findByUsername(String username);
+    boolean existsByUsername(String username);
 }

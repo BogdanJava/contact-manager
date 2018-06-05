@@ -27,3 +27,6 @@
 ### Maven ###
 .mvn/
 mvnw*
+
+### Node & React ###
+frontend/node_modules

@@ -1,5 +1,6 @@
 package com.itechart.contactmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private Set<Phone> phones;
 

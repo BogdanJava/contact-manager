@@ -2,6 +2,8 @@ package com.itechart.contactmanager.dao;
 
 import com.itechart.contactmanager.model.Employee;
 
+import java.util.List;
+
 /**
  * @author Bogdan Shishkin
  * project: contact-manager
@@ -10,4 +12,5 @@ import com.itechart.contactmanager.model.Employee;
  */
 
 public interface EmployeeDao extends BaseDao<Employee> {
+    List<Employee> getByUserId(long userId);
 }

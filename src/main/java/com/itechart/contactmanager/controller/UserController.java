@@ -34,7 +34,7 @@ public class UserController {
         return new UserIdentityAvailability(!userDao.existsByUsername(username));
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/user/{username}")
     public ResponseEntity getUser(@CurrentUser CustomUserDetails userDetails,
                                   @PathVariable String username) {
         return ResponseEntity.ok(userService.getByUsername(username, userDetails));

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import Login from './Login/Login';
 import Signup from './Signup/Signup'
 import Employees from './Employees/Employees'
@@ -7,6 +7,8 @@ import Profile from './Profile/Profile'
 import './Main.css'
 import { withRouter } from 'react-router-dom'
 import NewEmployee from './Employees/NewEmployee/NewEmployee';
+import Phones from './Employees/Phones/Phones'
+import Home from './Home/Home'
 
 class Main extends Component {
 
@@ -16,8 +18,12 @@ class Main extends Component {
             return (
                 <main className="main">
                     <div className="container">
-                        <Route path="/login" render={(props) => <Login updateUser={this.props.updateUser} />} />
-                        <Route path="/signup" component={Signup} />
+                        <Switch>
+                            <Route path="/home" component={Home} />
+                            <Route path="/login" render={(props) => <Login updateUser={this.props.updateUser} />} />
+                            <Route path="/signup" component={Signup} />
+                            <Redirect from="/" to="/home" />
+                        </Switch>
                     </div>
                 </main>
             )
@@ -28,7 +34,8 @@ class Main extends Component {
                         <Route path="/employees" component={Employees} />
                         <Route path="/me" component={Profile} />
                         <Route path="/employee-new" component={NewEmployee} />
-                        <Route path="/employee-update/:id" render={(props) => <NewEmployee edit="true"/>}/>
+                        <Route path="/employee-update/:id" render={(props) => <NewEmployee edit="true" />} />
+                        <Route path="/employee-phones/:id" component={Phones} />
                     </div>
                 </main>
             )

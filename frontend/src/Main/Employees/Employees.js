@@ -86,6 +86,7 @@ export default class Employees extends React.Component {
                                                 </td>
                                                 <td>{employee.birthday}</td>
                                                 <td>
+                                                    <Link className="btn btn-success" to={`/employee-phones/${employee.id}`}>Show phones</Link>
                                                     <Link className="btn btn-warning" to={`/employee-update/${employee.id}`}>Edit</Link>
                                                     <button className="btn btn-danger" value={employee.id} onClick={this.deleteEmployeeById}>Delete</button>
                                                 </td>

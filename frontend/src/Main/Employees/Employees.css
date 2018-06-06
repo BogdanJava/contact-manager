@@ -19,3 +19,7 @@
     display: block;
     width: fit-content;
 }
+
+.btn-warning {
+    margin-left: 10px;
+}

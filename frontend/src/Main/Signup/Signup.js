@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Signup.css'
 import { API_URL, AUTH_TOKEN } from '../../utils/constants.js'
 import { request } from '../../utils/APIUtils'
+import { withRouter } from 'react-router-dom';
 
 class Signup extends Component {
     constructor(props) {
@@ -26,6 +27,9 @@ class Signup extends Component {
         event.preventDefault();
         this.signup(this.state).then(response => {
             console.log(response)
+            if(response.success) {
+                this.props.history.push('/login')
+            }
         }).catch(error => {
             console.log(error)
         })
@@ -69,4 +73,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default withRouter(Signup) ;

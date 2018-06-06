@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   loadCurrentUser() {
+    console.log(this)
     getCurrentUser()
       .then(response => {
         console.log(response)
@@ -39,7 +40,7 @@ class App extends Component {
       <Router>
         <div className="app">
           <Header isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} />
-          <Main currentUser={this.state.currentUser} />
+          <Main currentUser={this.state.currentUser} updateUser={this.loadCurrentUser.bind(this)} />
           <Footer />
         </div>
       </Router>

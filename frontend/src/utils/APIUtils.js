@@ -31,13 +31,57 @@ export const login = function (loginRequest) {
     })
 }
 
+export function logout(component) {
+    localStorage.removeItem(AUTH_TOKEN)
+    return request({
+        url: API_URL + '/auth/logout',
+        method: 'POST',
+        body: ''
+    })
+}
+
 export function getCurrentUser() {
-    if(!localStorage.getItem(AUTH_TOKEN)) {
+    if (!localStorage.getItem(AUTH_TOKEN)) {
         return Promise.reject("No access token set.");
     }
-
     return request({
         url: API_URL + "/user/me",
         method: 'GET'
     });
+}
+
+export function getEmployees() {
+    return request({
+        url: API_URL + "/employee",
+        method: 'GET'
+    })
+}
+
+export function getEmployeeById(id) {
+    return request({
+        url: `${API_URL}/employee/${id}`
+    })
+}
+
+export function updateEmployee(employeeRequest) {
+    return request({
+        url: `${API_URL}/employee`,
+        method: 'PUT',
+        body: JSON.stringify(employeeRequest)
+    })
+}
+
+export function deleteEmployee(id) {
+    return request({
+        url: `${API_URL}/employee/${id}`,
+        method: 'DELETE'
+    })
+}
+
+export function addEmployee(employeeRequest) {
+    return request({
+        url: API_URL + "/employee",
+        method: 'POST',
+        body: JSON.stringify(employeeRequest)
+    })
 }

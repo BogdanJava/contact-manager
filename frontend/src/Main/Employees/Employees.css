@@ -1,0 +1,21 @@
+.employees-table {
+}
+
+.employees-table__header {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.employees-table__table {
+    text-align: center;
+}
+
+.btn-danger {
+    margin-left: 10px;
+}
+
+#button-add {
+    display: block;
+    width: fit-content;
+}

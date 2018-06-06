@@ -6,6 +6,8 @@ import com.itechart.contactmanager.payload.ApiResponse;
 import com.itechart.contactmanager.payload.LoginRequest;
 import com.itechart.contactmanager.payload.SignUpRequest;
 import com.itechart.contactmanager.payload.TokenAuthenticationResponse;
+import com.itechart.contactmanager.security.CurrentUser;
+import com.itechart.contactmanager.security.CustomUserDetails;
 import com.itechart.contactmanager.service.TokenService;
 import com.itechart.contactmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -63,5 +62,11 @@ public class AuthController {
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/users/{username}").buildAndExpand(result.getUsername()).toUri();
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logout(@CurrentUser CustomUserDetails userDetails) {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return ResponseEntity.ok(new ApiResponse(true, "Successfully logged out"));
     }
 }

@@ -44,11 +44,19 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity addEmployee(@CurrentUser CustomUserDetails userDetails,
                                       @Valid @RequestBody EmployeeRequest employeeRequest) {
-        Employee saved = employeeDao.save(employeeRequest.create(userDao.findByUsername(userDetails.getUsername())));
+        Employee saved = employeeService.save(employeeRequest.create(userDao.findByUsername(userDetails.getUsername())));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{employeeId}")
                 .buildAndExpand(saved.getId()).toUri();
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "Employee created successfully"));
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity deleteEmployee(@CurrentUser CustomUserDetails userDetails,
+                                         @PathVariable long employeeId) {
+        employeeService.delete(employeeId, userDetails);
+        return ResponseEntity.ok(new ApiResponse(true, "Employee #" + employeeId + " " +
+                "successfully deleted"));
     }
 
     @PostMapping("/phone")
@@ -57,6 +65,14 @@ public class EmployeeController {
         Phone phone = phoneService.save(phoneRequest, userDetails);
         return ResponseEntity.ok(new ApiResponse(true, "Phone " + phone.getNumber() +
                 " has been successfully created."));
+    }
+
+    @PutMapping
+    public ResponseEntity updateEmployee(@CurrentUser CustomUserDetails userDetails,
+                                         @Valid @RequestBody EmployeeRequest employeeRequest) {
+        return ResponseEntity.ok(
+                employeeService.update(employeeRequest.create(employeeDao.findOne(employeeRequest.getId()).getUser()),
+                        userDetails));
     }
 
     @GetMapping("/{employeeId}")

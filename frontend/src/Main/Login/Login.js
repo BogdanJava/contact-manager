@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.css'
 import { API_URL, AUTH_TOKEN } from '../../utils/constants.js'
 import { login } from '../../utils/APIUtils'
+import {withRouter} from 'react-router-dom'
 
 class Login extends Component {
 
@@ -19,6 +20,7 @@ class Login extends Component {
         event.preventDefault();
         login(this.state).then(response => {
             localStorage.setItem(AUTH_TOKEN, response.token)
+            this.props.updateUser()
         }).catch(error => {
             console.log(error)
         })

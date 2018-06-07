@@ -4,6 +4,7 @@ import com.itechart.contactmanager.dao.PhoneDao;
 import com.itechart.contactmanager.model.Phone;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -29,5 +30,15 @@ public class PhoneDaoImpl extends BaseDaoImpl<Phone> implements PhoneDao {
     public List<Phone> getByEmployeeId(long employeeId) {
         return entityManager.createQuery("SELECT p FROM Phone p WHERE p.employee.id = :employeeId", entityClass)
                 .setParameter("employeeId", employeeId).getResultList();
+    }
+
+    @Override
+    public boolean exists(String number) {
+        try{
+            findByNumber(number);
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 }

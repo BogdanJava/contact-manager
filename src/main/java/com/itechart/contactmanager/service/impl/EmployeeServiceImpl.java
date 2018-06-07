@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -24,13 +25,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    @Transactional
     @Override
     public Employee save(Employee employee) {
         return employeeDao.save(employee);
     }
 
-    @Transactional
     @Override
     public Employee update(Employee employee, CustomUserDetails userDetails) {
         if(employee.getUser().getId() != userDetails.getId()) {
@@ -39,7 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return this.employeeDao.update(employee);
     }
 
-    @Transactional
     @Override
     public void delete(long employeeId, CustomUserDetails userDetails) {
         Employee employee = employeeDao.findOne(employeeId);

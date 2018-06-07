@@ -59,14 +59,6 @@ public class EmployeeController {
                 "successfully deleted"));
     }
 
-    @PostMapping("/phone")
-    public ResponseEntity addPhone(@CurrentUser CustomUserDetails userDetails,
-                                   @Valid @RequestBody PhoneRequest phoneRequest) {
-        Phone phone = phoneService.save(phoneRequest, userDetails);
-        return ResponseEntity.ok(new ApiResponse(true, "Phone " + phone.getNumber() +
-                " has been successfully created."));
-    }
-
     @PutMapping
     public ResponseEntity updateEmployee(@CurrentUser CustomUserDetails userDetails,
                                          @Valid @RequestBody EmployeeRequest employeeRequest) {
@@ -79,17 +71,5 @@ public class EmployeeController {
     public ResponseEntity getById(@CurrentUser CustomUserDetails userDetails,
                                   @PathVariable long employeeId) {
         return ResponseEntity.ok(employeeService.getById(employeeId, userDetails));
-    }
-
-    @GetMapping("/{employeeId}/phones")
-    public ResponseEntity getPhones(@CurrentUser CustomUserDetails userDetails,
-                                    @PathVariable long employeeId) {
-        return ResponseEntity.ok(phoneService.getPhones(employeeId, userDetails));
-    }
-
-    @GetMapping("/phone/{phoneId}")
-    public ResponseEntity getPhoneById(@CurrentUser CustomUserDetails userDetails,
-                                       @PathVariable long phoneId) {
-        return ResponseEntity.ok(phoneService.getPhone(phoneId, userDetails));
     }
 }

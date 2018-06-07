@@ -14,4 +14,5 @@ import java.util.List;
 public interface PhoneDao extends BaseDao<Phone> {
     Phone findByNumber(String number);
     List<Phone> getByEmployeeId(long employeeId);
+    boolean exists(String number);
 }

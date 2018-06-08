@@ -21,10 +21,11 @@ class Login extends Component {
     login(this.state)
             .then(response => {
               localStorage.setItem(AUTH_TOKEN, response.token)
-              createNotification(MessageType.SUCCESS, "Logged in successfully!", 4000)
+              createNotification(MessageType.SUCCESS, 'Logged in successfully!', 4000)
               this.props.updateUser()
             })
             .catch(error => {
+              createNotification(MessageType.ERROR, 'Invalid username or/and password', 4000)
               console.log(error)
             })
   }

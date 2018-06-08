@@ -2,6 +2,7 @@ import React from 'react'
 import './NewPhone.css'
 import { withRouter } from 'react-router-dom'
 import { addPhone } from '../../../../utils/APIUtils'
+import { createNotification, MessageType } from '../../../../utils/notifications'
 
 class NewPhone extends React.Component {
 
@@ -19,9 +20,11 @@ class NewPhone extends React.Component {
         addPhone(this.state).then(response => {
             if (response.success) {
                 this.props.fetchPhones()
+                createNotification(MessageType.SUCCESS, response.message, 3000)
             }
         }).catch(error => {
             console.log(error)
+            createNotification(MessageType.ERROR, error.message, 3000)
         })
     }
 

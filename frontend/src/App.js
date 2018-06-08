@@ -5,6 +5,9 @@ import Main from './Main/Main'
 import Footer from './Footer/Footer'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import { getCurrentUser } from './utils/APIUtils'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+
 
 class App extends Component {
 
@@ -39,6 +42,7 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
+          <ToastContainer />
           <Header isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} />
           <Main currentUser={this.state.currentUser} updateUser={this.loadCurrentUser.bind(this)} />
           <Footer />

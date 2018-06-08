@@ -5,6 +5,7 @@ import { getPhonesByEmployeeId, deletePhone } from './../../../utils/APIUtils'
 import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import NewPhone from './NewPhone/NewPhone'
+import { createNotification, MessageType } from '../../../utils/notifications'
 
 class Phones extends React.Component {
 
@@ -47,6 +48,7 @@ class Phones extends React.Component {
             if (response.success) {
                 console.log(response.message)
                 this.fetchPhones()
+                createNotification(MessageType.SUCCESS, response.message, 3000)
             }
         }).catch(error => {
             console.log(error)

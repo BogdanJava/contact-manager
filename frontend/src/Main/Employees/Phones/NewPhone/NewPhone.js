@@ -24,7 +24,7 @@ class NewPhone extends React.Component {
             }
         }).catch(error => {
             console.log(error)
-            createNotification(MessageType.ERROR, error.message, 3000)
+            createNotification(MessageType.ERROR, "Incorrect phone number", 3000)
         })
     }
 

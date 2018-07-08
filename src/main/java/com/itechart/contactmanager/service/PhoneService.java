@@ -10,4 +10,5 @@ public interface PhoneService {
     Phone save(PhoneRequest phoneRequest, CustomUserDetails userDetails);
     List<Phone> getPhones(long employeeId, CustomUserDetails userDetails);
     Phone getPhone(long phoneId, CustomUserDetails userDetails);
+    void deletePhone(long phoneId, CustomUserDetails userDetails);
 }

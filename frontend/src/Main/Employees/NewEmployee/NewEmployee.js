@@ -2,6 +2,7 @@ import React from 'react'
 import './NewEmployee.css'
 import { addEmployee, updateEmployee, getEmployeeById } from './../../../utils/APIUtils';
 import { withRouter } from 'react-router-dom';
+import { createNotification, MessageType } from '../../../utils/notifications'
 
 class NewEmployee extends React.Component {
 
@@ -89,12 +90,14 @@ class NewEmployee extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (!this.validateState(this.state)) {
+            createNotification(MessageType.WARNING, "Invalid form", 4000)
             console.log('invalid form')
             return;
         }
         if (this.props.edit) {
             updateEmployee(this.state).then(response => {
                 console.log(response)
+                createNotification(MessageType.INFO, "Employee edited", 4000)
                 this.props.history.push('/employees')
             }).catch(error => {
                 console.log(error)
@@ -102,6 +105,7 @@ class NewEmployee extends React.Component {
         } else {
             addEmployee(this.state).then(response => {
                 console.log(`added: ${response}`)
+                createNotification(MessageType.INFO, "Employee added", 4000)
                 this.props.history.push('/employees')
             }).catch(error => {
                 console.log('error')
@@ -110,8 +114,14 @@ class NewEmployee extends React.Component {
     }
 
     validateState(state) {
-        if(state.birthday.match(/[\d]{4}-[\d]{2}-[\d]{2}/) == null) return false;
-        if(state.name == "" || state.surname == "" || state.patronymic == "") return false;
+        if(state.birthday.match(/[\d]{4}-[\d]{2}-[\d]{2}/) == null) {
+            createNotification(MessageType.ERROR, "Birthday field is invalid", 2000)
+            return false;
+        }
+        if(state.name == "" || state.surname == "" || state.patronymic == "") {
+            createNotification(MessageType.ERROR, "Please fill required fields", 2000)
+            return false;
+        }
         return true;
     }
 

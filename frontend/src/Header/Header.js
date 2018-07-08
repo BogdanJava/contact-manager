@@ -48,6 +48,9 @@ class Header extends Component {
                         <Link className="nav-link" to="/me">{currentUser.username.toUpperCase()}</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/upload">Upload files</Link>
+                    </li>
+                    <li className="nav-item">
                         <a className="nav-link" onClick={this.handleLogout} href="#">Logout</a>
                     </li>
                 </ul>);

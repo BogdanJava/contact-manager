@@ -4,6 +4,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { getEmployees } from '../../utils/APIUtils'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { deleteEmployee } from './../../utils/APIUtils';
+import { createNotification, MessageType } from '../../utils/notifications'
 
 export default class Employees extends React.Component {
 
@@ -24,8 +25,10 @@ export default class Employees extends React.Component {
             console.log(response)
             if (response.success) {
                 this.fetchEmployees()
+                createNotification(MessageType.SUCCESS, response.message, 3000)
             }
         }).catch(error => {
+            createNotification(MessageType.ERROR, error.message, 3000)
             console.log(error)
         })
     }
@@ -86,6 +89,7 @@ export default class Employees extends React.Component {
                                                 </td>
                                                 <td>{employee.birthday}</td>
                                                 <td>
+                                                    <Link className="btn btn-success" to={`/employee-phones/${employee.id}`}>Show phones</Link>
                                                     <Link className="btn btn-warning" to={`/employee-update/${employee.id}`}>Edit</Link>
                                                     <button className="btn btn-danger" value={employee.id} onClick={this.deleteEmployeeById}>Delete</button>
                                                 </td>

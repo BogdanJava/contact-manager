@@ -85,3 +85,32 @@ export function addEmployee(employeeRequest) {
         body: JSON.stringify(employeeRequest)
     })
 }
+
+export function getPhonesByEmployeeId(employeeId) {
+    return request({
+        url: `${API_URL}/phone/by-employee/${employeeId}`,
+        method: 'GET'
+    })
+}
+
+export function addPhone(phoneRequest) {
+    return request({
+        url: `${API_URL}/phone`,
+        method: 'POST',
+        body: JSON.stringify(phoneRequest)
+    })
+}
+
+export function getPhoneById(id) {
+    return request({
+        url: `${API_URL}/phone/${id}`,
+        method: 'GET'
+    })
+}
+
+export function deletePhone(id) {
+    return request({
+        url: `${API_URL}/phone/${id}`,
+        method: 'DELETE'
+    })
+}

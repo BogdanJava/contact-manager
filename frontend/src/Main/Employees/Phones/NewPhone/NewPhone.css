@@ -1,0 +1,28 @@
+.new-phone {
+    display: flex;
+    justify-content: center;
+    float: left;
+}
+
+.new-phone__prefix {
+    text-align: center;
+    padding: 0 12px;
+    background: #ccc;
+    border: 1px solid #b3acac;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.new-phone__number {
+    width: 220px
+}
+
+.new-phone__button {
+    border-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.plus {
+    vertical-align: middle;
+}

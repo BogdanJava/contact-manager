@@ -1,10 +1,7 @@
 package com.itechart.contactmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "employee")
 @ToString(exclude = {"phones", "user"})
+@EqualsAndHashCode(of = "id")
 public class Employee {
 
     @Id
@@ -32,7 +30,7 @@ public class Employee {
     private Date birthday;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private Set<Phone> phones;
 
     @Embedded

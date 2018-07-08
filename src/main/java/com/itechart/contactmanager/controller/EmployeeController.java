@@ -37,8 +37,9 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getEmployees(@CurrentUser CustomUserDetails userDetails) {
-        return ResponseEntity.ok(employeeDao.getByUserId(userDetails.getId()));
+    public ResponseEntity<List<Employee>> getEmployees(
+            /*@CurrentUser CustomUserDetails userDetails*/) {
+        return ResponseEntity.ok(employeeDao.getByUserId(1));
     }
 
     @PostMapping
